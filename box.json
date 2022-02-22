@@ -1,6 +1,6 @@
 {
 	"id": "com.test.box",
-	"version": "1.0.0",
+	"version": "1.0.4",
 	"name": "test Gauge",
 	"description": "Testing Gauge test - JLH",
 	"newInstancePrefix": "Gauge",
