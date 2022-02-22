@@ -18,7 +18,7 @@
 		},
 		{
 			"kind": "styling",
-			"tag": "com-test-gauge-sps",
+			"tag": "com-test-box-sps",
 			"url": "https://github.com/Harris-jlr/SAP-Custom-Charts/blob/master/box/box_sps.js",
 			"integrity": "",
 			"ignoreIntegrity": true

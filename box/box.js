@@ -119,9 +119,5 @@
 		}
 	}
 	
-	customElements.define("com-demo-gauge", Box);
+	customElements.define("com-test-gauge", Box);
 })();
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Secu
