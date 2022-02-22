@@ -33,9 +33,9 @@
 	],
 	"properties": {
 		"value": {
-			"type": "string",
+			"type": "integer",
 			"description": "Gauge value",
-			"default": "0"
+			"default": "10"
 		},
 		"info": {
 			"type": "string",
@@ -62,7 +62,7 @@
 			"parameters": [
 				{
 					"name": "newValue",
-					"type": "string",
+					"type": "integer",
 					"description": "Gauge value"
 				},
 				{
@@ -79,7 +79,7 @@
 			"body": "this.value = newValue; this.info = newInfo; this.color = newColor;"
 		},
 		"getValue": {
-			"returnType": "string",
+			"returnType": "integer",
 			"description": "Returns the Gauge value.",
 			"body": "return this.value;"
 		}
