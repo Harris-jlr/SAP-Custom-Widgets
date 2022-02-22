@@ -1,32 +1,32 @@
 {
-	"id": "com.demo.gauge",
+	"id": "com.test.gauge",
 	"version": "1.0.0",
-	"name": "Demo Gauge",
-	"description": "A gauge demo",
+	"name": "test Gauge",
+	"description": "Testing Gauge test - JLH",
 	"newInstancePrefix": "Gauge",
-	"icon": "https://example.demo/box/icon.png",
-	"vendor": "Demo",
+	"icon": "https://github.com/Harris-jlr/SAP-Custom-Charts/blob/master/box/icon.png",
+	"vendor": "test",
 	"eula": "EULA",
 	"license": "1.0",
 	"webcomponents": [
 		{
 			"kind": "main",
-			"tag": "com-demo-gauge",
-			"url": "https://example.demo/box/box.js",
+			"tag": "com-test-gauge",
+			"url": "https://github.com/Harris-jlr/SAP-Custom-Charts/blob/master/box/box.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		},
 		{
 			"kind": "styling",
-			"tag": "com-demo-gauge-sps",
-			"url": "https://example.demo/box/box_sps.js",
+			"tag": "com-test-gauge-sps",
+			"url": "https://github.com/Harris-jlr/SAP-Custom-Charts/blob/master/box/box_sps.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		},
 		{
 			"kind": "builder",
-			"tag": "com-demo-box-bps",
-			"url": "https://example.demo/box/box_bps.js",
+			"tag": "com-test-box-bps",
+			"url": "https://github.com/Harris-jlr/SAP-Custom-Charts/blob/master/box/box_bps.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		}
