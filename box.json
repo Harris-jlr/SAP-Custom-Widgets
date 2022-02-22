@@ -4,7 +4,7 @@
 	"name": "test Gauge",
 	"description": "Testing Gauge test - JLH",
 	"newInstancePrefix": "Gauge",
-	"icon": "https://github.com/Harris-jlr/SAP-Custom-Charts/blob/master/box/icon.png",
+	"icon": "https://nttdatagroup.sharepoint.com/:i:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/box%20sample/box/icon.png?csf=1&web=1&e=UW5ff6",
 	"vendor": "test",
 	"eula": "EULA",
 	"license": "1.0",
@@ -12,21 +12,21 @@
 		{
 			"kind": "main",
 			"tag": "com-test-box",
-			"url": "https://github.com/Harris-jlr/SAP-Custom-Charts/blob/master/box/box.js",
+			"url": "https://nttdatagroup.sharepoint.com/:u:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/box%20sample/box/box.js?csf=1&web=1&e=11avGy",
 			"integrity": "",
 			"ignoreIntegrity": true
 		},
 		{
 			"kind": "styling",
 			"tag": "com-test-box-sps",
-			"url": "https://github.com/Harris-jlr/SAP-Custom-Charts/blob/master/box/box_sps.js",
+			"url": "https://nttdatagroup.sharepoint.com/:u:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/box%20sample/box/box_sps.js?csf=1&web=1&e=ufKk3q",
 			"integrity": "",
 			"ignoreIntegrity": true
 		},
 		{
 			"kind": "builder",
 			"tag": "com-test-box-bps",
-			"url": "https://github.com/Harris-jlr/SAP-Custom-Charts/blob/master/box/box_bps.js",
+			"url": "https://nttdatagroup.sharepoint.com/:u:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/box%20sample/box/box_bps.js?csf=1&web=1&e=MALnL4",
 			"integrity": "",
 			"ignoreIntegrity": true
 		}
