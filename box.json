@@ -1,5 +1,5 @@
 {
-	"id": "com.test.gauge",
+	"id": "com.test.box",
 	"version": "1.0.0",
 	"name": "test Gauge",
 	"description": "Testing Gauge test - JLH",
@@ -11,7 +11,7 @@
 	"webcomponents": [
 		{
 			"kind": "main",
-			"tag": "com-test-gauge",
+			"tag": "com-test-box",
 			"url": "https://github.com/Harris-jlr/SAP-Custom-Charts/blob/master/box/box.js",
 			"integrity": "",
 			"ignoreIntegrity": true

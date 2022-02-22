@@ -119,5 +119,5 @@
 		}
 	}
 	
-	customElements.define("com-test-gauge", Box);
+	customElements.define("com-test-box", Box);
 })();
