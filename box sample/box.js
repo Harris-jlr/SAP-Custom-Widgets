@@ -119,5 +119,5 @@
 		}
 	}
 	
-	customElements.define("com-test-box", Box);
+	customElements.define("com-jlh-box", Box);
 })();
