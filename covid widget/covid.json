@@ -11,7 +11,7 @@
       {
         "kind": "main",
         "tag": "com-ajax-covid",
-        "url": "https://nttdatagroup.sharepoint.com/:u:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/covid%20widget/covid.js?csf=1&web=1&e=KVk7xf",
+        "url": "https://awesome-mclean-fd31a6.netlify.app/covid%20widget/covid.js",
         "integrity": "",
         "ignoreIntegrity": true
       }
