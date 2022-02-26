@@ -12,14 +12,14 @@
         {
 			"kind": "main",
 			"tag": "com-sap-sample-helloworld3",
-            "url": "https://davidhstocker.github.io/SAC_CustomWidget_HelloWorld_3/webcomponent.js",
+            "url": "https://awesome-mclean-fd31a6.netlify.app/helloWorld/webcomponent3.js",
             "integrity": "",
             "ignoreIntegrity" : true
         },
 		{
 			"kind": "styling",
 			"tag": "com-sap-sample-helloworld3-aps",
-            "url": "https://awesome-mclean-fd31a6.netlify.app/helloWorld/webcomponent3.js",
+            "url": "https://awesome-mclean-fd31a6.netlify.app/helloWorld/aps_webcomponent.js",
 			"integrity": "",
             "ignoreIntegrity" : true
 		}
