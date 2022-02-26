@@ -1,0 +1,33 @@
+{
+    "eula": "",
+    "vendor": "SAP",
+    "license": "",
+    "id": "com.sap.sac.sample.echarts.demo",
+    "version": "1.0.0",
+    "name": "ECharts Demo",
+    "newInstancePrefix": "EChartDemo",
+    "description": "A sample custom widget wrapped EChart Demo",
+    "webcomponents": [
+      {
+        "kind": "main",
+        "tag": "com-sap-sample-echarts-demo",
+        "url": "https://nttdatagroup.sharepoint.com/:u:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/echarts/main.js?csf=1&web=1&e=m23dCp",
+        "integrity": "",
+        "ignoreIntegrity": true
+      }
+    ],
+    "properties": {
+          "width": {
+              "type": "integer",
+              "default": 600
+          },
+          "height": {
+              "type": "integer",
+              "default": 420
+          }
+    },
+    "methods": {
+    },
+    "events": {
+    }
+  }

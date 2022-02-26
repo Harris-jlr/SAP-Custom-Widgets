@@ -34,5 +34,5 @@ var getPromisify = (url, data, dataType) => {
     }
   }
 
-  customElements.define('com-sap-sample-ajax-covid', MainWebComponent)
+  customElements.define('com-ajax-covid', MainWebComponent)
 })()
