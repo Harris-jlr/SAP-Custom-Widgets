@@ -19,7 +19,7 @@
 		{
 			"kind": "styling",
 			"tag": "com-sap-sample-helloworld3-aps",
-            "url": "https://davidhstocker.github.io/SAC_CustomWidget_HelloWorld_3/aps_webcomponent.js",
+            "url": "https://awesome-mclean-fd31a6.netlify.app/helloWorld/webcomponent3.js",
 			"integrity": "",
             "ignoreIntegrity" : true
 		}
