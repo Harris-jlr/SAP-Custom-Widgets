@@ -1,0 +1,25 @@
+<!-- The first few items are self explanatory and you can do what you will. 
+The “name” and “description” elements determine what the designer sees in the widget palette. 
+A couple of the single field elements are of special note: -->
+
+<!-- The id section -->
+
+“id” – In principle, you can put anything here that you want. This is the technical identifier for the widget. It is a good best practice to tack the major version on to the end. This way, if you ship a major version upgrade, users can run them side by side and they won’t interfere with each other.
+
+<!-- The New Instance Prefex section -->
+“newInstancePrefix” – This determines the default ID of the widget. So if you leave it as “WidgetTemplate”, your widgets will be called “WidgetTemplate_01”, “WidgetTemplate_02”, etc.
+
+<!-- The Icon section -->
+“icon” – This is the URL pointing to the icon image. This could be a URL, such as http://somewhere/something.png. Alternatively, it could also be a Data URL, which packs the icon image encoding right into the URL and no hosting is needed. The template uses a Data URL to show how they are crafted.
+
+<!-- The Webcomponent section -->
+The webcomponents element contains the metadata that the widget needs for accessing and using the web component JavaScript files. In the course of this tutorial series, you will add two child elements to this element.
+
+<!-- The properties section -->
+The properties element is where your properties will go.
+
+<!-- the method section -->
+The methods element is where the script API method definitions will go. All widgets have a handful of standard script methods. This element allows you to define the script commands that you want to have available to your widget.
+
+<!-- The event section -->
+The events method defines the script events that you’ll want your widget to have.

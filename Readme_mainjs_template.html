@@ -1,0 +1,228 @@
+<!-- 
+I’d first like to draw your attention to the first parameter, which reads ‘com-sap-sample-template‘. 
+This is the name of the HTML tag that you are implementing and if you look at a running app in the browser’s developer tools, that’s the tag you’ll see. 
+Note! We don’t do it in this tutorial, but for productive widgets, we recommend that you add the major version number to the end to 
+differentiate simultaneously installed major version releases.
+
+Now look at the method definitions inside. There are certain methods that you can implement to respond to system life cycle callbacks.
+
+constructor() – this is a standard web components callback and is called once, at initial widget instantiation. 
+In our template, it is where we attach out template to the shadow DOM. Later on, we’ll do a bit more housekeeping here.
+
+connectedCallback() – this a standard web components callback and is fired whenever the widget is added to the HTML DOM. 
+It should not be confused with the constructor(), which is fired the first time only. This callback is fired every time. 
+So if the page where your widget lives is brought into focus and the widget is added to the DOM, this event will fire.
+disconnectedCallback() – is fired when the widget is deleted from the DOM; such as when the panel that is lives in is closed, the user switched to another page, etc.
+
+onCustomWidgetBeforeUpdate() and onCustomWidgetAfterUpdate() – these callbacks fire when properties are changed (via script or via panel). 
+One of the events is obviously executed before the property change is applied and the other after the change happens.
+
+onCustomWidgetBeforeUpdate(oChangedProperties) – When properties are changed, this callback is called BEFORE they are actually changed.
+
+onCustomWidgetAfterUpdate(oChangedProperties) – When properties are changed, this callback is called AFTER they are actually changed.
+
+onCustomWidgetDestroy() – the mirror image of constructor().
+
+onCustomWidgetResize(width, height) – this callback is fired whenever the widget is resized when it is active. 
+So if it is currently hidden when the sheet is resized for example, it won’t fire. 
+You may want to re-check dimensions in the connectedCallback event as well().  
+If you don’t need it, we suggest commenting it out to save CPU.  
+If it is enabled, SAP Analytics cloud will track DOM size changes and call this method as needed.
+
+redraw() – this method is not a custom widget framework callback. 
+I included a stub to this method in the template, because this is the pattern that I use in my own widgets. 
+There are many callbacks that could trigger re-rendering; so I centralise the redraw in a single method and call that method whenever 
+I need to update the widget in the canvas.
+
+ -->
+<div class="ds-blog-post__body ds-editor-content">
+    <p>As of the current release of SAP Analytics cloud, custom widgets are available. With the <a href="https://blogs.sap.com/2019/11/25/announcing-custom-widgets-in-sap-analytics-cloud/">announcement</a>, I promised a tutorial on how to build a widget. <strong><em>Let’s do this!</em></strong></p>
+<p><strong>Note!</strong>&nbsp; You can jump to any post in the series from the agenda, below.</p>
+<p>We’ll be creating a very simple KPI tile. It will have a configurable text field, that can be set from the design panel. So far, so TextField. The standard text field’s font can only be set in the design panel. We’ll build a tile with dynamic styling. In the name of simplicity, we’ll only implement a minimal suite of styling options; specifically, by altering the HTML header tag of our text label.</p>
+<p>Why a widget that already (more or less) exists in the standard product? Firstly, it is just about as simple as widgets get, allowing us to concentrate on the workflow and development process. Secondly, the standard KPI tile is too complex and takes up too much screen from some uses. Lastly, being able to style text and KPI tiles on the fly would be nice. The series will work as follows:</p>
+<ul>
+<li><strong>Step 0 (this post)</strong> – We’ll be taking a 10,000 ft view of the widget and walking through their structure.</li>
+<li><a href="https://blogs.sap.com/2020/01/28/your-first-sap-analytics-cloud-custom-widget-part-1/"><strong>Step 1</strong></a> – We’ll do the bare minimum required to get a widget into an app. It won’t do anything, but you’ll have a widget. The content will be hardcoded into the shadow DOM. It won’t actually DO much, but this exercise will demonstrate the boilerpate and workflow that every widget needs.</li>
+<li><a href="https://blogs.sap.com/2020/01/29/your-first-sap-analytics-cloud-custom-widget-part-2"><strong>Step 2</strong></a> – You’ll make slight edits in preparation for later changes. You’ll still be showing the same hardcoded HTML, but you’ll be doing it from JavaScript and be ready to start making it dynamic.</li>
+<li><a href="https://blogs.sap.com/2020/02/04/your-first-sap-analytics-cloud-custom-widget-part-3"><strong>Step 3</strong></a> – You’ll set up an input field for the text field in the styling panel. With this, you will learn what is required to make your widget configurable in the styling and builder panels.<br>
+<a href="https://blogs.sap.com/2020/02/05/your-first-sap-analytics-cloud-custom-widget-part-4"><strong>Step 4</strong></a> – You add a script API, which will be able to set the header tag (h1-h3), get the current hX tag and set the text value via script. With this, you will learn how to create API methods that do and don’t have input parameters and also set up ones that return a value.</li>
+<li><a href="https://blogs.sap.com/2020/02/06/your-first-sap-analytics-cloud-custom-widget-part-5"><strong>Step 5</strong></a> – You’ll let the viewer cycle through the hX tags when the widget is clicked. With this, you’ll learn how to declare scripting events and how to tie browser events to script events.</li>
+</ul>
+<p>Together, the results will look something like this…</p>
+<p><img class=" ds-lightbox__img" src="https://blogs.sap.com/wp-content/uploads/2020/01/Screenshot-2020-01-22-at-13.42.03-2.png" data-index="1" data-id="plbox-1037470"></p>
+<p>&nbsp;</p>
+<h2>The Structure of a Widget</h2>
+<p>A widget has at least two parts and possibly up to four.</p>
+<ul>
+<li><strong>Metadata</strong> – A JSON file, which is uploaded to the tenant. It defines everything that SAC needs to know about a widget; how it is identified, its properties, events, methods, and where the web component implementation can be found. This file is required.</li>
+<li><strong>The “main” web component</strong> – A JavaScript file, containing the implementation of the of the <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components" target="_blank">web component</a> in the application canvas. This file is required and needs to be visible to the end user, as their browser will be told to fetch it when this widget is encountered in an app. Where it is hosted is up to the developer. E.g. a partner or community member implementing it for use by many customers may want to host it on their favorite cloud platform, while a customer implementing a widget for internal use might just want to run a <a href="https://nodejs.org/" target="_blank">Node.js</a> server with <a href="https://www.npmjs.com/package/http-server" target="_blank">htttp-server</a> to host it internally.</li>
+<li><strong>An optional “styling” web component</strong> – If you elect to extend the styling pane, this Javascript file is where you’d define the content that you’ll be adding to the styling pane. The styling pane can be synchronised with the widget properties.</li>
+<li><strong>An optional “builder” web component</strong> – Like the styling web component, but for the builder panel. Having both options lets you allocate your design panel widget configuration tasks to the panel that fits best.</li>
+</ul>
+<p>At runtime, the URL that the browser needs to get the web components from is passed to the browser, which then requests the JavaScript file from its host web server.</p>
+<p><img class=" ds-lightbox__img" src="https://blogs.sap.com/wp-content/uploads/2020/01/Blog1-1.png" data-index="2" data-id="plbox-1037470"></p>
+<p>&nbsp;</p>
+<h2>The Custom Widget Start Template</h2>
+<p>In principle, you can write your entire widget from scratch. You could also modify an existing project. I’ve created a template project for speeding this process up. It is available on my personal github profile, <a href="https://github.com/davidhstocker/SAC_CustomWidget_StartTemplate" target="_blank">here</a>. It contains minimal stubs for the metadata JSON, a main sheet web component stub and a design panel web component stub. It is a <a href="https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template" target="_blank">github template repository</a>, so you can easily create a new project from it.</p>
+<ul>
+<li><strong>rename_me_i_am_a_template.json</strong> – this is your metadata file. You will of course want to rename it.</li>
+<li><strong>webcomponent.js</strong> – this is your main sheet web component.</li>
+<li><strong>aps_webcomponent.js</strong> – this is a stub web component for the builder or styling pane. APS is short for “Additional Properties Sheet”. Those of you with experience building custom components for Design Studio and Lumira Designer may recognise this term. The areas of the builder and styling pane that you can work in are functionally similar to the <a href="https://blogs.sap.com/2015/12/07/your-first-extension-part-4a-introduction-to-the-additional-properties-sheet/">additional properties sheet of Lumira Designer</a>.</li>
+</ul>
+<h2>The Metadata Structure</h2>
+<p>Have a look at <em>rename_me_i_am_a_template.json</em></p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token punctuation">{</span>
+  <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Hello World"</span><span class="token punctuation">,</span>
+  <span class="token string">"description"</span><span class="token punctuation">:</span> <span class="token string">"Custom Widget Template"</span><span class="token punctuation">,</span>
+  <span class="token string">"eula"</span><span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+  <span class="token string">"vendor"</span><span class="token punctuation">:</span> <span class="token string">"Who created me?"</span><span class="token punctuation">,</span>
+  <span class="token string">"license"</span><span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+  <span class="token string">"id"</span><span class="token punctuation">:</span> <span class="token string">"com.sap.sample.template.0"</span><span class="token punctuation">,</span>
+  <span class="token string">"newInstancePrefix"</span><span class="token punctuation">:</span> <span class="token string">"WidetTemplate"</span><span class="token punctuation">,</span>
+  <span class="token string">"version"</span><span class="token punctuation">:</span> <span class="token string">"0.0.1"</span><span class="token punctuation">,</span>
+  <span class="token string">"icon"</span><span class="token punctuation">:</span> <span class="token string">"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAA3NCSVQICAjb4U/gAAAAb1BMVEX///+ZmZl4dXdBPj9hYGGOjpE6ODo8OjwvLC0lISIpJSaMiooyLzH/cjMxLi9GREb/ZSk2MzV9fX1MSks4NjcrJyn/WR9ycnJRT1AtKiv/TRVdXF1ra2v7VCfJyMk+PD6tra+rqqtUUlU0MTNqaGpjxDg2AAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAKhJREFUGNM9z9EagiAMBeDpEGkWNAGhqFTq/Z8xwK/+q7PtZgeg6npEMcBPJ0d1Kmg6ZnFGRZcLESnR7tpoouuVSCPPZYHWee+XxTsrvQeYQrwV97tL5uZigMeoqucTUSnWEVBX4fWaW2BYz1W3bXsLDPldcD8MoYZ3glmMjNbGLJk5igDgnLTGHazdAPo1Gdms2bZXhRmbMuNR5rNWJuX075sMYg57jV94IQ2Xqt1atQAAAABJRU5ErkJggg=="</span><span class="token punctuation">,</span>
+  <span class="token string">"webcomponents"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">"properties"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">"methods"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">"events"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>The first few items are self explanatory and you can do what you will. The “name” and “description” elements determine what the designer sees in the widget palette. A couple of the single field elements are of special note:</p>
+<ul>
+<li>“id” – In principle, you can put anything here that you want. This is the technical identifier for the widget. It is a good best practice to tack the major version on to the end. This way, if you ship a major version upgrade, users can run them side by side and they won’t interfere with each other.</li>
+<li>“newInstancePrefix” – This determines the default ID of the widget. So if you leave it as “WidgetTemplate”, your widgets will be called “WidgetTemplate_01”, “WidgetTemplate_02”, etc.</li>
+<li>“icon” – This is the URL pointing to the icon image. This could be a URL, such as http://somewhere/something.png. Alternatively, it could also be a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URL</a>, which packs the icon image encoding right into the URL and no hosting is needed. The template uses a Data URL to show how they are crafted.</li>
+<li>The webcomponents element contains the metadata that the widget needs for accessing and using the web component JavaScript files. In the course of this tutorial series, you will add two child elements to this element.</li>
+<li>The properties element is where your properties will go.</li>
+<li>The methods element is where the script API method definitions will go. All widgets have a handful of standard script methods. This element allows you to define the script commands that you want to have available to your widget.</li>
+<li>The events method defines the script events that you’ll want your widget to have.</li>
+</ul>
+<p>&nbsp;</p>
+<h2>The web component structure</h2>
+<p>In this file, you’ll define the web component template and you implement your custom tag. The Javascript class that you’ll implement will extend is HTML Element.</p>
+<p>Have a look at the hardcoded template.</p>
+<pre class=" language-javascript"><code class=" language-javascript">    <span class="token keyword">let</span> tmpl <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'template'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  tmpl<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token string">`
+    &lt;style&gt;
+    &lt;/style&gt;
+  `</span></span><span class="token punctuation">;</span></code></pre>
+<p>The string that currently has the style tag is going to go into the shadow DOM. Right now, it is just an empty css styling tag. This is your HTML document, which you can work with . It can be hardcoded (here in this string) or dynamic, or a hybrid. In initial exercises, you’ll hardcode your shadow DOM and later you’ll manipulate it dynamically.</p>
+<p>Have a look in the custom elements definition.</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> tmpl <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'template'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  tmpl<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token string">`
+      &lt;h1&gt;Hello World&lt;/h1&gt;
+  `</span></span><span class="token punctuation">;</span>
+
+  customElements<span class="token punctuation">.</span><span class="token function">define</span><span class="token punctuation">(</span><span class="token string">'com-sap-sample-helloworld1'</span><span class="token punctuation">,</span> <span class="token keyword">class</span> <span class="token class-name">HelloWorld1</span> <span class="token keyword">extends</span> <span class="token class-name">HTMLElement</span> <span class="token punctuation">{</span>
+
+
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+          <span class="token keyword">this</span><span class="token punctuation">.</span>_shadowRoot <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">attachShadow</span><span class="token punctuation">(</span><span class="token punctuation">{</span>mode<span class="token punctuation">:</span> <span class="token string">"open"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>_shadowRoot<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>tmpl<span class="token punctuation">.</span>content<span class="token punctuation">.</span><span class="token function">cloneNode</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token comment">//Fired when the widget is added to the html DOM of the page</span>
+      <span class="token function">connectedCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token punctuation">}</span>
+
+       <span class="token comment">//Fired when the widget is removed from the html DOM of the page (e.g. by hide)</span>
+      <span class="token function">disconnectedCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      
+      <span class="token punctuation">}</span>
+
+       <span class="token comment">//When the custom widget is updated, the Custom Widget SDK framework executes this function first</span>
+      <span class="token function">onCustomWidgetBeforeUpdate</span><span class="token punctuation">(</span>oChangedProperties<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+      <span class="token punctuation">}</span>
+
+      <span class="token comment">//When the custom widget is updated, the Custom Widget SDK framework executes this function after the update</span>
+      <span class="token function">onCustomWidgetAfterUpdate</span><span class="token punctuation">(</span>oChangedProperties<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">redraw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      
+      <span class="token comment">//When the custom widget is removed from the canvas or the analytic application is closed</span>
+      <span class="token function">onCustomWidgetDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token punctuation">}</span>
+
+      
+      <span class="token comment">//When the custom widget is resized on the canvas, the Custom Widget SDK framework executes the following JavaScript function call on the custom widget</span>
+      <span class="token comment">// Commented out by default</span>
+      <span class="token comment">/*
+      onCustomWidgetResize(width, height){
+      }
+      */</span>
+
+      <span class="token function">redraw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>I’d first like to draw your attention to the first parameter, which reads ‘<em>com-sap-sample-template</em>‘. This is the name of the HTML tag that you are implementing and if you look at a running app in the browser’s developer tools, that’s the tag you’ll see. <strong>Note!</strong> We don’t do it in this tutorial, but for productive widgets, we recommend that you add the major version number to the end to differentiate simultaneously installed major version releases.</p>
+<p>Now look at the method definitions inside. There are certain methods that you can implement to respond to system life cycle callbacks.</p>
+<ul>
+<li><strong>constructor()</strong> – this is a standard web components callback and is called once, at initial widget instantiation. In our template, it is where we attach out template to the shadow DOM. Later on, we’ll do a bit more housekeeping here.</li>
+<li><strong>connectedCallback()</strong> – this a standard web components callback and is fired whenever the widget is added to the HTML DOM. It should not be confused with the constructor(), which is fired the first time only. This callback is fired every time. So if the page where your widget lives is brought into focus and the widget is added to the DOM, this event will fire.</li>
+<li><strong>disconnectedCallback()</strong> – is fired when the widget is deleted from the DOM; such as when the panel that is lives in is closed, the user switched to another page, etc.</li>
+<li>onCustomWidgetBeforeUpdate() and onCustomWidgetAfterUpdate() – these callbacks fire when properties are changed (via script or via panel). One of the events is obviously executed before the property change is applied and the other after the change happens.</li>
+<li><strong>onCustomWidgetBeforeUpdate(oChangedProperties)</strong> – When properties are changed, this callback is called BEFORE they are actually changed.</li>
+<li><strong>onCustomWidgetAfterUpdate(oChangedProperties)</strong> – When properties are changed, this callback is called AFTER they are actually changed.</li>
+<li><strong>onCustomWidgetDestroy()</strong> – the mirror image of constructor().</li>
+<li><strong>onCustomWidgetResize(width, height)</strong> – this callback is fired whenever the widget is resized when it is active. So if it is currently hidden when the sheet is resized for example, it won’t fire. You may want to re-check dimensions in the connectedCallback event as well().&nbsp; If you don’t need it, we suggest commenting it out to save CPU.&nbsp; If it is enabled, SAP Analytics cloud will track DOM size changes and call this method as needed.</li>
+<li><strong>redraw()</strong> – this method is not a custom widget framework callback. I included a stub to this method in the template, because this is the pattern that I use in my own widgets. There are many callbacks that could trigger re-rendering; so I centralise the redraw in a single method and call that method whenever I need to update the widget in the canvas.</li>
+</ul>
+<p>&nbsp;</p>
+<h2>Styling Panel Web Component Structure</h2>
+<p>You might notice something with the styling panel template code.</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> template <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"template"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  template<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token string">`
+      &lt;style&gt;
+      &lt;/style&gt;
+  `</span></span><span class="token punctuation">;</span>
+
+  <span class="token keyword">class</span> <span class="token class-name">HelloWorldAps</span> <span class="token keyword">extends</span> <span class="token class-name">HTMLElement</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>_shadowRoot <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">attachShadow</span><span class="token punctuation">(</span><span class="token punctuation">{</span>mode<span class="token punctuation">:</span> <span class="token string">"open"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>_shadowRoot<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>template<span class="token punctuation">.</span>content<span class="token punctuation">.</span><span class="token function">cloneNode</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token comment">//Fired when the widget is added to the html DOM of the page</span>
+      <span class="token function">connectedCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">redraw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+       <span class="token comment">//Fired when the widget is removed from the html DOM of the page (e.g. by hide)</span>
+      <span class="token function">disconnectedCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      
+      <span class="token punctuation">}</span>
+
+       <span class="token comment">//When the custom widget is updated, the Custom Widget SDK framework executes this function first</span>
+      <span class="token function">onCustomWidgetBeforeUpdate</span><span class="token punctuation">(</span>oChangedProperties<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+      <span class="token punctuation">}</span>
+
+      <span class="token comment">//When the custom widget is updated, the Custom Widget SDK framework executes this function after the update</span>
+      <span class="token function">onCustomWidgetAfterUpdate</span><span class="token punctuation">(</span>oChangedProperties<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+      <span class="token punctuation">}</span>
+      
+      <span class="token comment">//When the custom widget is removed from the canvas or the analytic application is closed</span>
+      <span class="token function">onCustomWidgetDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      
+      <span class="token punctuation">}</span>
+
+      <span class="token function">redraw</span><span class="token punctuation">(</span>
+
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token punctuation">}</span>
+
+customElements<span class="token punctuation">.</span><span class="token function">define</span><span class="token punctuation">(</span><span class="token string">"com-sap-sample-template'-aps"</span><span class="token punctuation">,</span> HelloWorldAps<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>It is basically the same thing as the main webcomponent. It only differs in that the HTML tag is different and the onCustomWidgetResize() callback is missing. Note! If you implement both styling and builder panels, make sure that the tags are unique.</p>
+<p>This is a tour of the template and the basic pattern that custom widgets will use.&nbsp; <a href="https://blogs.sap.com/2020/01/28/your-first-sap-analytics-cloud-custom-widget-part-1/">Next time</a>, we’ll take this template and get it into SAP Analytics Cloud as a custom widget.</p>
+  </div>
