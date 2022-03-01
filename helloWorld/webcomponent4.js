@@ -14,12 +14,13 @@
             this._tagContainer;
             this._tagType = "h1";
             this._tagText = "Hello World";
+
 		}
 
         //Fired when the widget is added to the html DOM of the page
         connectedCallback(){
             this._firstConnection = true;
-            this.redraw(); 
+            this.redraw();       
         }
 
          //Fired when the widget is removed from the html DOM of the page (e.g. by hide)
@@ -62,7 +63,6 @@
             this._tagText = value;
         }
 
-
         get headingType() {
             return this._tagType;
             }
@@ -70,7 +70,6 @@
         set headingType(value) {
             this._tagType = value;
         }
-
         // End - Getters and Setters
 
         redraw(){
@@ -83,7 +82,6 @@
             var theText = document.createTextNode(this._tagText);    
             this._tagContainer.appendChild(theText); 
             this._shadowRoot.appendChild(this._tagContainer);
-
         }
     
     
