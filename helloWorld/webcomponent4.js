@@ -3,7 +3,7 @@
     tmpl.innerHTML = `
     `;
 
-    customElements.define('com-sap-sample-helloworld4', class HelloWorld extends HTMLElement {
+    customElements.define('com-sap-sample-helloworld4', class HelloWorld4 extends HTMLElement {
 
 
 		constructor() {
