@@ -18,8 +18,39 @@
 	}
 ],
 "properties": {
+	"BU_name": {
+		"type": "string",
+		"description": "The text to be displayed in the BU Name",
+		"default" : "PSaS"
+	},
+	"BU_forcastAmnt": {
+		"type": "string",
+		"description": "The amount to be displayed in the forcast amount",
+		"default" : "19,123.00"
+	},
+	"BU_directAmnt": {
+		"type": "string",
+		"description": "The amount to be displayed in the direct amount",
+		"default" : "19,123.00"
+	},
+	"headingType": {
+		"type": "string",
+		"description": "The heading level of the widget; h1-h3. Default is h1.",
+		"default" : "h1"
+	}
 },
 "methods": {
+	"setText": {
+		"description": "Set the text value of the widget",
+		"parameters": [
+			{
+				"name": "newTextValue",
+				"type": "string",
+				"description": "The displayed angle of the gauge"
+			}
+		],
+		"body": "this.widgetText = newTextValue;"
+	}
 },
 "events": {
 }
