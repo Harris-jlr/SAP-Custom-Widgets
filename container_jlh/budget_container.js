@@ -157,7 +157,7 @@
 		<h2>SAP CUSTOM WIDGET LAYOUT</h2>
 <div class="flex-container">
 <!-- beginging of custom card -->
-   <div v-for="BU in Budget" :key="BU.name" class="flex bg-gray-100 border-gray-300 rounded-md">
+   <div class="flex bg-gray-100 border-gray-300 rounded-md">
       <div class="flex col">
         <div class="flex text-sm py-4"><p class="font-light text-xl">{{ BU.name }}</p></div>
         <div class="flex text-sm py-4"> <p class="font-bold text-xl">{{ BU.forcastAmnt }} <span class="text-xs font-light text-gray-500"> FCST </span></p></div>
