@@ -43,5 +43,5 @@
 		}
 	}
 
-customElements.define("com-jlh-container-sps", ContainerSps);
+customElements.define("com-jlh-budget-container-sps", ContainerSps);
 })();
