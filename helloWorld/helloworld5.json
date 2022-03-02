@@ -1,0 +1,75 @@
+{
+"name": "Hello World Step 5",
+"description": "Part of the hello world custom widget tutorial for SAC.  Now with a script API",
+"eula": "",
+"vendor": "",
+"license": "",
+"id": "com.sap.sample.helloworld5",
+"newInstancePrefix": "HelloWorld5",
+"version": "0.0.1",
+"icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAA3NCSVQICAjb4U/gAAAAb1BMVEX///+ZmZl4dXdBPj9hYGGOjpE6ODo8OjwvLC0lISIpJSaMiooyLzH/cjMxLi9GREb/ZSk2MzV9fX1MSks4NjcrJyn/WR9ycnJRT1AtKiv/TRVdXF1ra2v7VCfJyMk+PD6tra+rqqtUUlU0MTNqaGpjxDg2AAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAKhJREFUGNM9z9EagiAMBeDpEGkWNAGhqFTq/Z8xwK/+q7PtZgeg6npEMcBPJ0d1Kmg6ZnFGRZcLESnR7tpoouuVSCPPZYHWee+XxTsrvQeYQrwV97tL5uZigMeoqucTUSnWEVBX4fWaW2BYz1W3bXsLDPldcD8MoYZ3glmMjNbGLJk5igDgnLTGHazdAPo1Gdms2bZXhRmbMuNR5rNWJuX075sMYg57jV94IQ2Xqt1atQAAAABJRU5ErkJggg==",
+"webcomponents": [
+        {
+            "kind": "main",
+            "tag": "com-sap-sample-helloworld4",
+            "url": "https://awesome-mclean-fd31a6.netlify.app/helloWorld/webcomponent5.js",
+            "integrity": "",
+            "ignoreIntegrity" : true
+        },
+        {
+            "kind": "styling",
+            "tag": "com-sap-sample-helloworld4-aps",
+            "url": "https://awesome-mclean-fd31a6.netlify.app/helloWorld/aps_webcomponent5.js",
+            "integrity": "",
+            "ignoreIntegrity" : true
+        }
+],
+"properties": {
+        "headingType": {
+                "type": "string",
+                "description": "The heading level of the widget; h1-h3. Default is h1.",
+                "default" : "h1"
+        },
+        "widgetText": {
+                "type": "string",
+                "description": "The text to be displayed in the widget",
+                "default" : "Hello World"
+        }
+},
+"methods": {
+        "setH1": {
+            "description": "Update the hX tag of the KPI field to h1",
+            "body": "this.headingType = 'h1';"
+        },
+        "setH2": {
+            "description": "Update the hX tag of the KPI field to h2",
+            "body": "this.headingType = 'h2';"
+        },
+        "setH3": {
+            "description": "Update the hX tag of the KPI field to h3",
+            "body": "this.headingType = 'h3';"
+        },
+        "getH": {
+            "description": "Get the hX tag of the KPI field",
+            "body": "return this.headingType;",
+            "returnType": "string"
+        },
+        "setText": {
+            "description": "Set the text value of the widget",
+            "parameters": [
+                {
+                    "name": "newTextValue",
+                    "type": "string",
+                    "description": "The displayed angle of the gauge"
+                }
+            ],
+            "body": "this.widgetText = newTextValue;"
+                    }
+
+                },
+        "events": {
+             "onClick": {
+                "description": "Called when the user clicks the Gauge"
+        }
+    }
+}
