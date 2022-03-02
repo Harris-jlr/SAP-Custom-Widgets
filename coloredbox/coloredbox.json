@@ -4,7 +4,7 @@
 	"name": "Colored Box",
 	"description": "A colored box",
 	"newInstancePrefix": "ColoredBox",
-	"icon": "https://nttdatagroup.sharepoint.com/:i:/s/NTTXD/EYDY7_2dKd5HqhEr96YV5QoB6MyouS3yxrOuP3yPs9nBHw?e=bnPoUM",
+	"icon": "https://awesome-mclean-fd31a6.netlify.app/coloredbox/icon.png",
 	"vendor": "SAP",
 	"eula": "",
 	"license": "",
@@ -12,21 +12,21 @@
 		{
 			"kind": "main",
 			"tag": "com-sap-sample-coloredbox",
-			"url": "https://nttdatagroup.sharepoint.com/:u:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/coloredbox/coloredbox.js?csf=1&web=1&e=hPbJQH",
+			"url": "https://awesome-mclean-fd31a6.netlify.app/coloredbox/coloredbox.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		},
 		{
 			"kind": "styling",
 			"tag": "com-sap-sample-coloredbox-styling",
-			"url": "https://nttdatagroup.sharepoint.com/:u:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/coloredbox/coloredbox_styling.js?csf=1&web=1&e=bVhyl3",
+			"url": "https://awesome-mclean-fd31a6.netlify.app/coloredbox/coloredbox_styling.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		},
 		{
 			"kind": "builder",
 			"tag": "com-sap-sample-coloredbox-builder",
-			"url": "https://nttdatagroup.sharepoint.com/:u:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/coloredbox/coloredbox_builder.js?csf=1&web=1&e=RrWe8n",
+			"url": "https://awesome-mclean-fd31a6.netlify.app/coloredbox/coloredbox_builder.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		}

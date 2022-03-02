@@ -4,7 +4,7 @@
 	"name": "jlh box",
 	"description": "jlh box",
 	"newInstancePrefix": "box",
-	"icon": "https://nttdatagroup.sharepoint.com/:i:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/box%20sample/icon.png?csf=1&web=1&e=WG6Apq",
+	"icon": "https://awesome-mclean-fd31a6.netlify.app/custom_widgets/box_sample/icon.png",
 	"vendor": "jlh",
 	"eula": "EULA",
 	"license": "1.0",
@@ -12,21 +12,21 @@
 		{
 			"kind": "main",
 			"tag": "com-jlh-box",
-			"url": "https://nttdatagroup.sharepoint.com/:u:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/box%20sample/box.js?csf=1&web=1&e=hfOT9l",
+			"url": "https://awesome-mclean-fd31a6.netlify.app/box_sample/box.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		},
 		{
 			"kind": "styling",
 			"tag": "com-jlh-box-sps",
-			"url": "https://nttdatagroup.sharepoint.com/:u:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/box%20sample/box_sps.js?csf=1&web=1&e=VloiKm",
+			"url": "https://awesome-mclean-fd31a6.netlify.app/box_sample/box_sps.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		},
 		{
 			"kind": "builder",
 			"tag": "com-jlh-box-bps",
-			"url": "https://nttdatagroup.sharepoint.com/:u:/r/sites/NTTXD/Shared%20Documents/Projects/NTT%20DATA/Internal%20CX%20Projects/SAP/custom_widgets/box%20sample/box_bps.js?csf=1&web=1&e=7itWGP",
+			"url": "https://awesome-mclean-fd31a6.netlify.app/box_sample/box_bps.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		}
