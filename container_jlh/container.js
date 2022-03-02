@@ -151,8 +151,7 @@
 		  }
 		  .flex-1 {
 			  flex: 1 1 0%;
-		  }
-				  
+		  }	  
 		</style>
 		
 		<h2>SAP CUSTOM WIDGET LAYOUT</h2>
