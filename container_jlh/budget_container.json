@@ -37,6 +37,11 @@
 		"type": "string",
 		"description": "The heading level of the widget; h1-h3. Default is h1.",
 		"default" : "h1"
+	},
+	"widgetText": {
+		"type": "string",
+		"description": "The text to be displayed in the widget",
+		"default" : "Hello World"
 	}
 },
 "methods": {
@@ -52,7 +57,7 @@
 		"body": "this.widgetText = newTextValue;"
 	}
 },
-	"events": {
+"events": {
 		"onClick": {
 			"description": "Called when the user clicks the Box."
 		}
