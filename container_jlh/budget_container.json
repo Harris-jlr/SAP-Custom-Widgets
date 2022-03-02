@@ -11,21 +11,21 @@
 	"webcomponents": [
 		{
 			"kind": "main",
-			"tag": "com-jlh-container",
+			"tag": "com-jlh-budget-container",
 			"url": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/budget_container.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		},
 		{
 			"kind": "styling",
-			"tag": "com-jlh-container-sps",
+			"tag": "com-jlh-budget-container-sps",
 			"url": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/budget_container_sps.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		},
 		{
 			"kind": "builder",
-			"tag": "com-jlh-container-bps",
+			"tag": "com-jlh-budget-container-bps",
 			"url": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/budget_container_bps.js",
 			"integrity": "",
 			"ignoreIntegrity": true
