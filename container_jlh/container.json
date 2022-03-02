@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"name": "jlh container",
 	"description": "jlh container",
-	"newInstancePrefix": "container",
+	"newInstancePrefix": "budget_container",
 	"icon": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/icon.png",
 	"vendor": "jlh",
 	"eula": "EULA",
@@ -12,21 +12,21 @@
 		{
 			"kind": "main",
 			"tag": "com-jlh-container",
-			"url": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/container.js",
+			"url": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/budget_container.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		},
 		{
 			"kind": "styling",
 			"tag": "com-jlh-container-sps",
-			"url": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/container_sps.js",
+			"url": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/budget_container_sps.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		},
 		{
 			"kind": "builder",
 			"tag": "com-jlh-container-bps",
-			"url": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/container_bps.js",
+			"url": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/budget_container_bps.js",
 			"integrity": "",
 			"ignoreIntegrity": true
 		}
