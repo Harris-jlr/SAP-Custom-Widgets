@@ -240,5 +240,5 @@
 		}
 	}
 	
-	customElements.define("com-jlh-container", budget_Container);
+	customElements.define("com-jlh-container", Container);
 })();
