@@ -15,78 +15,12 @@
 			"url": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/budget_container.js",
 			"integrity": "",
 			"ignoreIntegrity": true
-		},
-		{
-			"kind": "styling",
-			"tag": "com-jlh-budget-container-sps",
-			"url": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/budget_container_sps.js",
-			"integrity": "",
-			"ignoreIntegrity": true
-		},
-		{
-			"kind": "builder",
-			"tag": "com-jlh-budget-container-bps",
-			"url": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/budget_container_bps.js",
-			"integrity": "",
-			"ignoreIntegrity": true
-		}
-	],
-	"properties": {
-		"info": {
-			"type": "string",
-			"description": "container info",
-			"default": ""
-		},
-		"color": {
-			"type": "string",
-			"description": "Text Color info",
-			"default": "#3498db"
-		},
-		"width": {
-			"type": "integer",
-			"default": 100
-		},
-		"height": {
-			"type": "integer",
-			"default": 100
-		},
-		"value": {
-			"type": "string",
-			"description": "container value",
-			"default": "10"
-		}
-	},
-	"methods": {
-		"setValue": {
-			"description": "Sets the container value.",
-			"parameters": [
-				{
-					"name": "newValue",
-					"type": "string",
-					"description": "container value"
-				},
-				{
-					"name": "newInfo",
-					"type": "string",
-					"description": "container info"
-				},
-				{
-					"name": "newColor",
-					"type": "string",
-					"description": "Text Color info"
-				}
-			],
-			"body": "this.value = newValue; this.info = newInfo; this.color = newColor;"
-		},
-		"getValue": {
-			"returnType": "string",
-			"description": "Returns the container value.",
-			"body": "return this.value;"
-		}
-	},
-	"events": {
-		"onClick": {
-			"description": "Called when the user clicks the container."
-		}
 	}
+],
+"properties": {
+},
+"methods": {
+},
+"events": {
+}
 }

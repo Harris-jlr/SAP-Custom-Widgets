@@ -1,6 +1,6 @@
-(function() { 
-	let template = document.createElement("template");
-	template.innerHTML = `
+(function()  {
+	let tmpl = document.createElement('template');
+	tmpl.innerHTML = `
 		<style>
 		.bg-blue-100 {
 			background-color: #ebf8ff;
@@ -175,70 +175,55 @@
   </div>
 </div>
 	`;
-
-	class Container extends HTMLElement {
-		constructor() {
-			super(); 
-			let shadowRoot = this.attachShadow({mode: "open"});
-			shadowRoot.appendChild(template.content.cloneNode(true));
-			
-			this.$style = shadowRoot.querySelector('style');			
-			this.$svg = shadowRoot.querySelector('svg');
-			
-			this.addEventListener("click", event => {
-				var event = new Event("onClick");
-				this.dispatchEvent(event);
-			});
-			
-			this._props = {};
-		}
-		
-		render(val, info, color) {
-			var val1 = val * 0.01;
-			var x = this.svg_circle_arc_path(500, 500, 450, -90, val1 * 180.0 - 90);
-			var rounded = Math.round( val * 10 ) / 10;
-
-			
-			if(rounded >=0 && rounded <=100) {
-				this.$style.innerHTML = ':host {border-radius: 10px;border-width: 2px;border-color: black;border-style: solid;display: block;}.body {background: #fff;}.metric {padding: 10%;}.metric svg {max-width: 100%;}.metric path {stroke-width: 75;stroke: #ecf0f1;fill: none;}.metric text {font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;}.metric.participation path.data-arc {stroke: ' + color + ';}.metric.participation text {fill: ' + color + ';}';
-				this.$svg.innerHTML = '<path d="M 950 500 A 450 450 0 0 0 50 500"></path><text class="percentage" text-anchor="middle" alignment-baseline="middle" x="500" y="300" font-size="140" font-weight="bold">' + rounded + '%</text><text class="title" text-anchor="middle" alignment-baseline="middle" x="500" y="450" font-size="90" font-weight="normal">' + info + '</text><path d="' + x + '" class="data-arc"></path>"';
-			}
-		}
-		  
-		polar_to_cartesian(cx, cy, radius, angle) {
-		    var radians;
-		    radians = (angle - 90) * Math.PI / 180.0;
-		    return [Math.round((cx + radius * Math.cos(radians)) * 100) / 100, Math.round((cy + radius * Math.sin(radians)) * 100) / 100];
-		}
-		
-		svg_circle_arc_path(x, y, radius, start_angle, end_angle) {
-		    var end_xy, start_xy;
-		    start_xy = this.polar_to_cartesian(x, y, radius, end_angle);
-		    end_xy = this.polar_to_cartesian(x, y, radius, start_angle);
-		    return "M " + start_xy[0] + " " + start_xy[1] + " A " + radius + " " + radius + " 0 0 0 " + end_xy[0] + " " + end_xy[1];
-		  };
-		  
-
-		onCustomWidgetBeforeUpdate(changedProperties) {
-			this._props = { ...this._props, ...changedProperties };
-		}
-
-		onCustomWidgetAfterUpdate(changedProperties) {
-			if ("value" in changedProperties) {
-				this.$value = changedProperties["value"];
-			}
-			
-			if ("info" in changedProperties) {
-				this.$info = changedProperties["info"];
-			}
-			
-			if ("color" in changedProperties) {
-				this.$color = changedProperties["color"];
-			}
-			
-			this.render(this.$value, this.$info, this.$color);
-		}
-	}
 	
-	customElements.define("com-jlh-budget-container", Container);
-})();
+		customElements.define('com-sap-sample-helloworld1', class HelloWorld1 extends HTMLElement {
+	
+	
+			constructor() {
+				super(); 
+				this._shadowRoot = this.attachShadow({mode: "open"});
+				this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
+				this._firstConnection = false;
+			}
+	
+			//Fired when the widget is added to the html DOM of the page
+			connectedCallback(){
+				this._firstConnection = true;
+				this.redraw();
+			}
+	
+			 //Fired when the widget is removed from the html DOM of the page (e.g. by hide)
+			disconnectedCallback(){
+			
+			}
+	
+			 //When the custom widget is updated, the Custom Widget SDK framework executes this function first
+			onCustomWidgetBeforeUpdate(oChangedProperties) {
+	
+			}
+	
+			//When the custom widget is updated, the Custom Widget SDK framework executes this function after the update
+			onCustomWidgetAfterUpdate(oChangedProperties) {
+				if (this._firstConnection){
+					this.redraw();
+				}
+			}
+			
+			//When the custom widget is removed from the canvas or the analytic application is closed
+			onCustomWidgetDestroy(){
+			}
+	
+			
+			//When the custom widget is resized on the canvas, the Custom Widget SDK framework executes the following JavaScript function call on the custom widget
+			// Commented out by default.  If it is enabled, SAP Analytics Cloud will track DOM size changes and call this callback as needed
+			//  If you don't need to react to resizes, you can save CPU by leaving it uncommented.
+			/*
+			onCustomWidgetResize(width, height){
+				redraw()
+			}
+			*/
+	
+			redraw(){
+			}
+		});
+	})();
