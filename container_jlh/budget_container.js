@@ -156,23 +156,57 @@
 		
 		<h2>SAP CUSTOM WIDGET LAYOUT</h2>
 <div class="flex-container">
-<!-- beginging of custom card -->
-   <div class="flex bg-gray-100 border-gray-300 rounded-md">
-      <div class="flex col">
-        <div class="flex text-sm py-4"><p class="font-light text-xl">{{ BU.name }}</p></div>
-        <div class="flex text-sm py-4"> <p class="font-bold text-xl">{{ BU.forcastAmnt }} <span class="text-xs font-light text-gray-500"> FCST </span></p></div>
-        <div class="flex text-sm py-4"> <p class="font-light text-lg">{{ BU.directAmnt }} <span class="text-xs font-light text-gray-500"> DIRECT</span> </p></div>
-      </div>
-      <div class="flex row">
-        <div class="flex-1 flex-grow p-4 bg-green-200 nooverlap-green rounded-md-btlft text-gray-600 text-sm"><span>KTLO</span> <br />
-          <span class="text-green-500">{{ BU.KTLO }}</span>
-        </div>
-        <div class="flex-1 flex-grow p-4 bg-red-200 nooverlap-red rounded-md-btrt text-gray-600 text-sm"><span>Initiatives</span> <br />
-          <span class="nowrap">{{BU.initiatives}} </span>
+	<!-- beginging of custom card -->
+   	<div class="flex bg-gray-100 border-gray-300 rounded-md">
+      	<div class="flex col">
+        	<div class="flex text-sm py-4"><p class="font-light text-xl">{{ BU.name }}</p></div>
+        	<div class="flex text-sm py-4"> <p class="font-bold text-xl">{{ BU.forcastAmnt }} <span class="text-xs font-light text-gray-500"> FCST </span></p></div>
+        	<div class="flex text-sm py-4"> <p class="font-light text-lg">{{ BU.directAmnt }} <span class="text-xs font-light text-gray-500"> DIRECT</span> </p></div>
+      	</div>
+      	<div class="flex row">
+        	<div class="flex-1 flex-grow p-4 bg-green-200 nooverlap-green rounded-md-btlft text-gray-600 text-sm"><span>KTLO</span> <br />
+          		<span class="text-green-500">{{ BU.KTLO }}</span>
+        	</div>
+        	<div class="flex-1 flex-grow p-4 bg-red-200 nooverlap-red rounded-md-btrt text-gray-600 text-sm"><span>Initiatives</span> <br />
+          		<span class="nowrap">{{BU.initiatives}} </span>
           
-        </div>
-      </div> 
-  </div>
+        	</div>
+      	</div> 
+  	</div>
+	  <!-- beginging of custom card -->
+   	<div class="flex bg-gray-100 border-gray-300 rounded-md">
+      	<div class="flex col">
+        	<div class="flex text-sm py-4"><p class="font-light text-xl">{{ BU.name }}</p></div>
+        	<div class="flex text-sm py-4"> <p class="font-bold text-xl">{{ BU.forcastAmnt }} <span class="text-xs font-light text-gray-500"> FCST </span></p></div>
+        	<div class="flex text-sm py-4"> <p class="font-light text-lg">{{ BU.directAmnt }} <span class="text-xs font-light text-gray-500"> DIRECT</span> </p></div>
+      	</div>
+      	<div class="flex row">
+        	<div class="flex-1 flex-grow p-4 bg-green-200 nooverlap-green rounded-md-btlft text-gray-600 text-sm"><span>KTLO</span> <br />
+          		<span class="text-green-500">{{ BU.KTLO }}</span>
+        	</div>
+        	<div class="flex-1 flex-grow p-4 bg-red-200 nooverlap-red rounded-md-btrt text-gray-600 text-sm"><span>Initiatives</span> <br />
+          		<span class="nowrap">{{BU.initiatives}} </span>
+          
+        	</div>
+      	</div> 
+  	</div>
+	  <!-- beginging of custom card -->
+   	<div class="flex bg-gray-100 border-gray-300 rounded-md">
+      	<div class="flex col">
+        	<div class="flex text-sm py-4"><p class="font-light text-xl">{{ BU.name }}</p></div>
+        	<div class="flex text-sm py-4"> <p class="font-bold text-xl">{{ BU.forcastAmnt }} <span class="text-xs font-light text-gray-500"> FCST </span></p></div>
+        	<div class="flex text-sm py-4"> <p class="font-light text-lg">{{ BU.directAmnt }} <span class="text-xs font-light text-gray-500"> DIRECT</span> </p></div>
+      	</div>
+      	<div class="flex row">
+        	<div class="flex-1 flex-grow p-4 bg-green-200 nooverlap-green rounded-md-btlft text-gray-600 text-sm"><span>KTLO</span> <br />
+          		<span class="text-green-500">{{ BU.KTLO }}</span>
+        	</div>
+        	<div class="flex-1 flex-grow p-4 bg-red-200 nooverlap-red rounded-md-btrt text-gray-600 text-sm"><span>Initiatives</span> <br />
+          		<span class="nowrap">{{BU.initiatives}} </span>
+          
+        	</div>
+      	</div> 
+  	</div>
 </div>
 	`;
 	
