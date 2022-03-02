@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"name": "jlh container",
 	"description": "jlh container",
-	"newInstancePrefix": "budget_container",
+	"newInstancePrefix": "budgetContainer",
 	"icon": "https://awesome-mclean-fd31a6.netlify.app/container_jlh/icon.png",
 	"vendor": "jlh",
 	"eula": "EULA",
