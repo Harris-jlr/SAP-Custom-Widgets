@@ -1,0 +1,283 @@
+{
+	"id": "com.gmail.cse.ari007.d3forcebubble",
+	"version": "1.0.0",
+	"name": "Force Bubble",
+	"description": "Force Bubble Chart",
+	"newInstancePrefix": "FBUBBLE",
+	"icon": "https://p925088.github.io/SAC-Custom-Widget/d3forcebubble_icon.png",
+	"vendor": "Arijit Das",
+	"eula": "The MIT License (MIT) \n Copyright (C) Microsoft Corporation. All rights reserved. \n Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: \n The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. \n THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+	"license": "The MIT License (MIT)",
+	"webcomponents": [
+		{
+			"kind": "main",
+			"tag": "com-gmail-cse-ari007-d3forcebubble",
+			"url": "/bubble_main.js",
+			"integrity": "sha256-Zi2X53WQa/2Kxo8+iHg+q2yPD7KLc8vkeTYRuXDLilI=",
+			"ignoreIntegrity": false
+		},
+		{
+			"kind": "styling",
+			"tag": "com-gmail-cse-ari007-d3forcebubble-sps",
+			"url": "bubble_sps.min.js",
+			"integrity": "sha256-y42oNFXtHoZ9fgIJrhAusLUVvz2545DbJc/RO+J76m8=",
+			"ignoreIntegrity": false
+		},
+		{
+			"kind": "builder",
+			"tag": "com-gmail-cse-ari007-d3forcebubble-bps",
+			"url": "bubble_bps.min.js",
+			"integrity": "sha256-84K//09aUNpPZTwhu/bRiEHeFqLmU2lPdXvKnxshan0=",
+			"ignoreIntegrity": false
+		}
+	],
+	"properties": {
+		"title": {
+			"type": "string",
+			"description": "Chart title",
+			"default": "Custom Force Bubble Widget"
+		},
+		"showTitle": {
+			"type": "boolean",
+			"description": "Show title of the chart",
+			"default": true
+		},
+		"showAvg": {
+			"type": "boolean",
+			"description": "Show average line",
+			"default": true
+		},
+		"valDecimal": {
+			"type": "integer",
+			"description": "Round x-axis value up to N decimal places",
+			"default": 2
+		},
+		"sizeDecimal": {
+			"type": "integer",
+			"description": "Round size value up to N decimal places",
+			"default": 2
+		},
+		"colorDecimal": {
+			"type": "integer",
+			"description": "Round color value up to N decimal places",
+			"default": 2
+		},
+		"xAxisLabel": {
+			"type": "string",
+			"description": "Name of measure on x-axis",
+			"default": "Value"
+		},
+		"sizeLabel": {
+			"type": "string",
+			"description": "Name of measure for bubble size",
+			"default": "Size"
+		},
+		"colorLabel": {
+			"type": "string",
+			"description": "Name of measure for bubble color",
+			"default": "Color"
+		},
+		"selectedLabel": {
+			"type": "string",
+			"description": "Label of selected bubble",
+			"default": "undefined"
+		},
+		"selectedXValue": {
+			"type": "number",
+			"description": "X-axis value of selected bubble",
+			"default": 0.0
+		},
+		"selectedSizeValue": {
+			"type": "number",
+			"description": "Size-axis value of selected bubble",
+			"default": 0.0
+		},
+		"selectedColorValue": {
+			"type": "number",
+			"description": "Color-axis value of selected bubble",
+			"default": 0.0
+		},		
+		"startColor": {
+			"type": "string",
+			"description": "Color of the bubble with lowest color value",
+			"default": "#ffcd00"
+		},
+		"endColor": {
+			"type": "string",
+			"description": "Color of the bubble with highest color value",
+			"default": "#b01c02"
+		},
+		"data": {
+			"type": "string",
+			"description": "Data in JSON format",
+			"default": "[{\"name\":\"Label 1\",\"size\":850.84, \"color\":50.7, \"xvalue\":100},{\"name\":\"Label 2\",\"size\":3308.76, \"color\":10, \"xvalue\":20.5}]"
+		},
+		"width": {
+			"type": "integer",
+			"default": 500
+		},
+		"height": {
+			"type": "integer",
+			"default": 170
+		}
+	},
+	"methods": {	
+		"setStartColor": {
+			"description": "Sets the color of the bubble with lowest value.",
+			"parameters": [
+				{
+					"name": "newColor",
+					"type": "string",
+					"description": "Color of the bubble with lowest value"
+				}
+			],
+			"body": "this.startColor = newColor;"
+		},
+		"setEndColor": {
+			"description": "Sets the color of the bubble with highest value.",
+			"parameters": [
+				{
+					"name": "newColor",
+					"type": "string",
+					"description": "Color of the bubble with highest value"
+				}
+			],
+			"body": "this.endColor = newColor;"
+		},
+		"setTitleVisible": {
+			"description": "Show title of the chart.",
+			"parameters": [
+				{
+					"name": "flag",
+					"type": "boolean",
+					"description": "Show title of the chart"
+				}
+			],
+			"body": "this.showTitle = flag;"
+		},
+		"setAvgVisible": {
+			"description": "Show average line.",
+			"parameters": [
+				{
+					"name": "flag",
+					"type": "boolean",
+					"description": "Show average line"
+				}
+			],
+			"body": "this.showAvg = flag;"
+		},		
+		"setTitle": {
+			"description": "Sets the title of the chart.",
+			"parameters": [
+				{
+					"name": "newValue",
+					"type": "string",
+					"description": "The new title of chart"
+				}
+			],
+			"body": "this.title = newValue;"
+		},
+		"setData": {
+			"description": "Sets the data of the chart.",
+			"parameters": [
+				{
+					"name": "newJSONData",
+					"type": "string",
+					"description": "The new data of chart"
+				}
+			],
+			"body": "this.data = newJSONData;"
+		},
+		"getSelectedLabel": {
+			"returnType": "string",
+			"description": "Returns the label of selected bubble.",
+			"body": "return this.selectedLabel;"
+		},
+		"getSelectedXValue": {
+			"returnType": "number",
+			"description": "Returns the x-axis value of selected bubble.",
+			"body": "return this.selectedXValue;"
+		},
+		"getSelectedSizeValue": {
+			"returnType": "number",
+			"description": "Returns the size-axis value of selected bubble.",
+			"body": "return this.selectedSizeValue;"
+		},
+		"getSelectedColorValue": {
+			"returnType": "number",
+			"description": "Returns the color-axis value of selected bubble.",
+			"body": "return this.selectedColorValue;"
+		},
+		"setXAxisLabel": {
+			"description": "Sets the label of measure plotted on x-axis of the chart.",
+			"parameters": [
+				{
+					"name": "newValue",
+					"type": "string",
+					"description": "The new name of measure on x-axis"
+				}
+			],
+			"body": "this.xAxisLabel = newValue;"
+		},
+		"setSizeAxisLabel": {
+			"description": "Sets the label of measure represented by bubble size.",
+			"parameters": [
+				{
+					"name": "newValue",
+					"type": "string",
+					"description": "The new name of measure for bubble size"
+				}
+			],
+			"body": "this.sizeLabel = newValue;"
+		},
+		"setColorAxisLabel": {
+			"description": "Sets the label of measure represented by bubble color.",
+			"parameters": [
+				{
+					"name": "newValue",
+					"type": "string",
+					"description": "The new name of measure for bubble color"
+				}
+			],
+			"body": "this.colorLabel = newValue;"
+		},
+		"setValueDecimal": {
+			"description": "Sets the decimal places for measure on x-axis.",
+			"parameters": [
+				{
+					"name": "newValue",
+					"type": "integer",
+					"description": "Decimal places of measure on x-axis"
+				}
+			],
+			"body": "this.valDecimal = newValue;"
+		},
+		"setSizeValueDecimal": {
+			"description": "Sets the decimal places for measure represented by bubble size.",
+			"parameters": [
+				{
+					"name": "newValue",
+					"type": "integer",
+					"description": "Decimal places of measure for bubble size"
+				}
+			],
+			"body": "this.sizeDecimal = newValue;"
+		},
+		"setColorValueDecimal": {
+			"description": "Sets the decimal places for measure represented by bubble color.",
+			"parameters": [
+				{
+					"name": "newValue",
+					"type": "integer",
+					"description": "Decimal places of measure for bubble color"
+				}
+			],
+			"body": "this.colorDecimal = newValue;"
+		}
+	},
+	"events": {
+		"onSelect": {
+			"description": "Called when the user selects/de-selects a bubble."
+		}
+	}
+}

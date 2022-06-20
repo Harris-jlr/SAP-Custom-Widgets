@@ -1,0 +1,78 @@
+{
+	"id": "com-sap-guage",
+	"version": "1.0.4",
+	"name": "sap-guage",
+	"description": "sap-guage",
+	"newInstancePrefix": "guage",
+	"icon": "#",
+	"vendor": "Mckesson",
+	"eula": "EULA",
+	"license": "1.0",
+	"webcomponents": [
+		{
+			"kind": "main",
+			"tag": "com-sap-guage",
+			"url": "https://awesome-mclean-fd31a6.netlify.app/guage/sap-guage.js",
+			"integrity": "",
+			"ignoreIntegrity": true
+		}
+	],
+	"properties": {
+		"info": {
+			"type": "string",
+			"description": "box info",
+			"default": ""
+		},
+		"color": {
+			"type": "string",
+			"description": "Text Color info",
+			"default": "#3498db"
+		},
+		"width": {
+			"type": "integer",
+			"default": 100
+		},
+		"height": {
+			"type": "integer",
+			"default": 100
+		},
+		"value": {
+			"type": "string",
+			"description": "box value",
+			"default": "10"
+		}
+	},
+	"methods": {
+		"setValue": {
+			"description": "Sets the box value.",
+			"parameters": [
+				{
+					"name": "newValue",
+					"type": "string",
+					"description": "box value"
+				},
+				{
+					"name": "newInfo",
+					"type": "string",
+					"description": "box info"
+				},
+				{
+					"name": "newColor",
+					"type": "string",
+					"description": "Text Color info"
+				}
+			],
+			"body": "this.value = newValue; this.info = newInfo; this.color = newColor;"
+		},
+		"getValue": {
+			"returnType": "string",
+			"description": "Returns the box value.",
+			"body": "return this.value;"
+		}
+	},
+	"events": {
+		"onClick": {
+			"description": "Called when the user clicks the Box."
+		}
+	}
+}
